@@ -32,9 +32,9 @@ const AddSchema = () => {
             schema: data?.schema ? JSON.parse(data?.schema) : null,
             uischema: data?.uischema ? JSON.parse(data?.uischema) : null,
             data: data?.data ? JSON.parse(data?.data) : {},
-            host: 'localhost:3000',
+            host: window.location.hostname,
             header: {
-                host: 'localhost:3000',
+                host: window.location.hostname,
                 userId: "superadmin@ameerpetit.com",
             },
         };
