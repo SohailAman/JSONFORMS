@@ -34,3 +34,4 @@ export const DynamicForm = ({ schemas, onSubmit }) => {
     </Form> : <p className="text-center p-3">No valid schema provided! <Link className="text-theme" to="/schema/add">Add a Schema</Link></p>
   );
 };
+ 
