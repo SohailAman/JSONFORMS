@@ -11,6 +11,8 @@ const validationSchema = Yup.object().shape({
         .required("Name is required"),
     display_name: Yup.string()
         .required("Display Name is required"),
+    host: Yup.string()
+        .required("Host Name is required"),
     schema: Yup.string()
         .required("Schema is required"),
 });
@@ -85,6 +87,18 @@ const AddSchema = () => {
                         />
                         <FormControl.Feedback type="invalid">
                             {errors.display_name?.message}
+                        </FormControl.Feedback>
+                    </FormGroup>
+                    <FormGroup className="mb-3" controlId="formGroupName">
+                        <FormLabel>Host Name</FormLabel>
+                        <FormControl
+                            type="text"
+                            placeholder="Enter your host..."
+                            {...register("host")}
+                            isInvalid={!!errors.host}
+                        />
+                        <FormControl.Feedback type="invalid">
+                            {errors.host?.message}
                         </FormControl.Feedback>
                     </FormGroup>
 
