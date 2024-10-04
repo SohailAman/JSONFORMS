@@ -52,7 +52,7 @@ const Users = () => {
                                             alt="Profile"
                                         />
                                     </div>
-                                    <h4 className="mb-2">{data?.data?.first_name} {data?.data?.last_name}</h4>
+                                    <h4 className="mb-2">{data?.data?.firstname} {data?.data?.lastname}</h4>
                                     <p className="text-muted mb-4">
                                         @Programmer ~{data?.data?.age}
                                     </p>
@@ -61,7 +61,7 @@ const Users = () => {
                                         <Button variant="outline-primary" className="btn-floating me-2">
                                             <FaFacebookF className="fa-lg" />
                                         </Button>
-                                        <Link to={data?.data?.email} target='_blank' className="btn btn-floating me-2">
+                                        <Link to={data?.data?.email} target='_blank' className="btn btn-floating me-2 btn-outline-primary">
                                             <BiEnvelope className="fa-lg" />
                                         </Link>
                                         <Button variant="outline-primary" className="btn-floating">
