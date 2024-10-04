@@ -17,8 +17,8 @@ const Users = () => {
                 const response = await fetch(
                     `https://api.ameerpetit.com/api/entities/items/user`
                 );
-                const data = await response.json();
-                setData(data);
+                const jsonResponse = await response.json();
+                setData(jsonResponse?.data);
             } catch (error) {
                 console.error("Error fetching data:", error);
             } finally {
