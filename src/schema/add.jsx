@@ -34,11 +34,7 @@ const AddSchema = () => {
             schema: data?.schema ? JSON.parse(data?.schema) : null,
             uischema: data?.uischema ? JSON.parse(data?.uischema) : null,
             data: data?.data ? JSON.parse(data?.data) : {},
-            host: window.location.hostname,
-            header: {
-                host: window.location.hostname,
-                userId: "superadmin@ameerpetit.com",
-            },
+            host: data?.host,
         };
 
         axios
@@ -92,6 +88,7 @@ const AddSchema = () => {
                     <FormGroup className="mb-3" controlId="formGroupName">
                         <FormLabel>Host Name</FormLabel>
                         <FormControl
+                            defaultValue={window.location.hostname}
                             type="text"
                             placeholder="Enter your host..."
                             {...register("host")}
