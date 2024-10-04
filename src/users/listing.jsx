@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card, CardBody, Col, Container, Row } from 'react-bootstrap'
+import { BiEnvelope } from 'react-icons/bi'
 import { BsClock } from 'react-icons/bs'
 import { FaFacebookF, FaSkype, FaTwitter } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
