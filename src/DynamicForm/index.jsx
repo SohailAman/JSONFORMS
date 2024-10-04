@@ -5,6 +5,7 @@ import {
 import { JsonForms } from "@jsonforms/react";
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export const DynamicForm = ({ schemas, onSubmit }) => {
 
@@ -16,7 +17,7 @@ export const DynamicForm = ({ schemas, onSubmit }) => {
     onSubmit(formData);
   };
 
-  return (
+  return (schemas ?
     <Form onSubmit={handleSubmit}>
       <JsonForms
         data={schemas?.data && Object.keys(schemas?.data).length > 0 ? schemas?.data : undefined}
@@ -30,6 +31,6 @@ export const DynamicForm = ({ schemas, onSubmit }) => {
       <Button className="bth-theme ms-auto d-block w-auto" type="submit">
         Submit
       </Button>
-    </Form>
+    </Form> : <p className="text-center p-3">No valid schema provided! <Link className="text-theme" to="/schema/add">Add a Schema</Link></p>
   );
 };

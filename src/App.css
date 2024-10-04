@@ -1,7 +1,15 @@
+* {
+  /* color: #fff; */
+  margin: 0;
+  padding: 0;
+}
+
 html,
 body,
 #root {
   height: 100%;
+  /* color: white; */
+  /* background: #333; */
 }
 
 .text-theme {

@@ -1,0 +1,137 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
+import React from 'react';
+import { Button, Container, Form, FormControl, FormGroup, FormLabel } from 'react-bootstrap';
+import { useForm } from 'react-hook-form'; // Make sure to import useForm
+import * as Yup from "yup";
+
+// Validation schema
+const validationSchema = Yup.object().shape({
+    name: Yup.string()
+        .required("Name is required"),
+    display_name: Yup.string()
+        .required("Display Name is required"),
+    schema: Yup.string()
+        .required("Schema is required"),
+});
+
+const AddSchema = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors }
+    } = useForm({
+        resolver: yupResolver(validationSchema)
+    });
+
+    const onSubmit = (data) => {
+        const reqData = {
+            type: data?.name,
+            name: data?.name,
+            display_name: data?.display_name,
+            schema: data?.schema ? JSON.parse(data?.schema) : null,
+            uischema: data?.uischema ? JSON.parse(data?.uischema) : null,
+            data: data?.data ? JSON.parse(data?.data) : {},
+            host: 'localhost:3000',
+            header: {
+                host: 'localhost:3000',
+                userId: "superadmin@ameerpetit.com",
+            },
+        };
+
+        axios
+            .post(`https://api.ameerpetit.com/api/entities/schemas`, reqData, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "*",
+                },
+            })
+            .then((response) => {
+                console.log("Response:", response.data);
+                alert("Form submitted successfully!");
+            })
+            .catch((error) => {
+                console.error("Error submitting form:", error);
+            });
+    };
+
+    return (
+        <Container>
+            <div className="shadow-sm p-3 my-5">
+                <h1 className="text-center text-theme">
+                    Add a New Schema
+                </h1>
+
+                <Form noValidate onSubmit={handleSubmit(onSubmit)}>
+                    <FormGroup className="mb-3" controlId="formGroupName">
+                        <FormLabel>Name/Type</FormLabel>
+                        <FormControl
+                            type="text"
+                            placeholder="Enter your name..."
+                            {...register("name")}
+                            isInvalid={!!errors.name}
+                        />
+                        <FormControl.Feedback type="invalid">
+                            {errors.name?.message}
+                        </FormControl.Feedback>
+                    </FormGroup>
+                    <FormGroup className="mb-3" controlId="formGroupName">
+                        <FormLabel>Display Name</FormLabel>
+                        <FormControl
+                            type="text"
+                            placeholder="Enter your display_name..."
+                            {...register("display_name")}
+                            isInvalid={!!errors.display_name}
+                        />
+                        <FormControl.Feedback type="invalid">
+                            {errors.display_name?.message}
+                        </FormControl.Feedback>
+                    </FormGroup>
+
+                    <FormGroup className="mb-3" controlId="formGroupSchema">
+                        <FormLabel>Schema</FormLabel>
+                        <FormControl
+                            as="textarea"
+                            rows={5}
+                            placeholder="Enter your schema..."
+                            {...register("schema")}
+                            isInvalid={!!errors.schema}
+                        />
+                        <FormControl.Feedback type="invalid">
+                            {errors.schema?.message}
+                        </FormControl.Feedback>
+                    </FormGroup>
+
+                    <FormGroup className="mb-3" controlId="formGroupUiSchema">
+                        <FormLabel>UI Schema</FormLabel>
+                        <FormControl
+                            as="textarea"
+                            rows={5}
+                            type="schema"  // Changed type to "schema"
+                            placeholder="Enter your uischema..."
+                            {...register("uischema")}
+                        />
+                    </FormGroup>
+                    <FormGroup className="mb-3" controlId="formGroupData">
+                        <FormLabel>Data</FormLabel>
+                        <FormControl
+                            as="textarea"
+                            rows={5}
+                            type="data"  // Changed type to "data"
+                            placeholder="Enter your data confirmation..."
+                            {...register("data")}
+                        />
+                    </FormGroup>
+
+                    <div className="d-grid my-5">
+                        <Button variant="primary" className='btn bth-theme' type="submit">
+                            Submit
+                        </Button>
+                    </div>
+                </Form>
+            </div>
+        </Container>
+    );
+}
+
+export default AddSchema;
