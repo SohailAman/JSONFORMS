@@ -15,7 +15,8 @@ export const AppRoutes = () => {
                 <Route path="/:type/add" element={<AddUsers />} />
 
 
-                <Route path="/schema/add" element={<AddSchema />} />
+                <Route path="/schemas/add" element={<AddSchema />} />
+                <Route path="/schemas/edit/:id" element={<AddSchema />} />
 
             </Route>
         </Routes>

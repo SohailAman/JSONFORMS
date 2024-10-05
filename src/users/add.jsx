@@ -45,7 +45,7 @@ const AddUsers = () => {
         };
 
         axios
-            .post(`https://api.ameerpetit.com/api/entities/items`, reqData, {
+            .post(`https://api.ameerpetit.com/api/entities/items/`, reqData, {
                 headers: {
                     "Content-Type": "application/json",
                     Accept: "*",

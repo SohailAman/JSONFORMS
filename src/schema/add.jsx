@@ -1,8 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Container, Form, FormControl, FormGroup, FormLabel } from 'react-bootstrap';
 import { useForm } from 'react-hook-form'; // Make sure to import useForm
+import { useParams } from "react-router-dom";
 import * as Yup from "yup";
 
 // Validation schema
@@ -18,6 +19,31 @@ const validationSchema = Yup.object().shape({
 });
 
 const AddSchema = () => {
+    const params = useParams()
+    const entityId = params.id
+
+
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch(
+                    `https://api.ameerpetit.com/api/entities/schemas/${entityId}/`
+                );
+                const data = await response.json();
+                setSchemas(data[0]);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        if (entityId) fetchData();
+    }, []);
+
+
     const {
         register,
         handleSubmit,

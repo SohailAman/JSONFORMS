@@ -16,7 +16,7 @@ const Users = () => {
             setLoading(true);
             try {
                 const response = await fetch(
-                    `https://api.ameerpetit.com/api/entities/items/user`
+                    `https://api.ameerpetit.com/api/entities/items/user/`
                 );
                 const jsonResponse = await response.json();
                 setUserData(jsonResponse);
