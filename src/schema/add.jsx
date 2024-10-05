@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Container, Form, FormControl, FormGroup, FormLabel } from 'react-bootstrap';
 import { useForm } from 'react-hook-form'; // Make sure to import useForm
 import { useParams } from "react-router-dom";
@@ -22,6 +22,7 @@ const AddSchema = () => {
     const params = useParams()
     const entityId = params.id
 
+    const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
@@ -33,7 +34,15 @@ const AddSchema = () => {
                     `https://api.ameerpetit.com/api/entities/schemas/${entityId}/`
                 );
                 const data = await response.json();
-                setSchemas(data[0]);
+                const entityData = data[0]
+
+                setValue("name", entityData?.type)
+                setValue("display_name", entityData?.display_name)
+                setValue("host", entityData?.host)
+                setValue("schema", JSON.stringify(entityData?.schema, null, 2))
+                setValue("uischema", JSON.stringify(entityData?.uischema, null, 2))
+                setValue("data", JSON.stringify(entityData?.data, null, 2))
+
             } catch (error) {
                 console.error("Error fetching data:", error);
             } finally {
@@ -47,7 +56,8 @@ const AddSchema = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors }
+        formState: { errors },
+        setValue
     } = useForm({
         resolver: yupResolver(validationSchema)
     });
@@ -62,26 +72,43 @@ const AddSchema = () => {
             data: data?.data ? JSON.parse(data?.data) : {},
             host: data?.host,
         };
-
-        axios
-            .post(`https://api.ameerpetit.com/api/entities/schemas`, reqData, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "*",
-                },
-            })
-            .then((response) => {
-                console.log("Response:", response.data);
-                alert("Form submitted successfully!");
-            })
-            .catch((error) => {
-                console.error("Error submitting form:", error);
-            });
+        if (entityId) {
+            axios
+                .put(`https://api.ameerpetit.com/api/entities/schemas/${entityId}/`, reqData, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "*/*",
+                    },
+                })
+                .then((response) => {
+                    console.log("Response:", response.data);
+                    alert("Form submitted successfully!");
+                })
+                .catch((error) => {
+                    console.error("Error submitting form:", error);
+                });
+        }
+        else {
+            axios
+                .post(`https://api.ameerpetit.com/api/entities/schemas`, reqData, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "*/*",
+                    },
+                })
+                .then((response) => {
+                    console.log("Response:", response.data);
+                    alert("Form submitted successfully!");
+                })
+                .catch((error) => {
+                    console.error("Error submitting form:", error);
+                });
+        }
     };
 
     return (
         <Container>
-            <div className="shadow-sm p-3 my-5">
+            {loading ? "Loading..." : <div className="shadow-sm p-3 my-5">
                 <h1 className="text-center text-theme">
                     Add a New Schema
                 </h1>
@@ -166,7 +193,7 @@ const AddSchema = () => {
                         </Button>
                     </div>
                 </Form>
-            </div>
+            </div>}
         </Container>
     );
 }

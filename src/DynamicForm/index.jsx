@@ -31,7 +31,7 @@ export const DynamicForm = ({ schemas, onSubmit }) => {
       <Button className="bth-theme ms-auto d-block w-auto" type="submit">
         Submit
       </Button>
-    </Form> : <p className="text-center p-3">No valid schema provided! <Link className="text-theme" to="/schema/add">Add a Schema</Link></p>
+    </Form> : <p className="text-center p-3">No valid schema provided! <Link className="text-theme" to="/schemas/add">Add a Schema</Link></p>
   );
 };
- 
+

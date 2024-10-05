@@ -48,7 +48,7 @@ const AddUsers = () => {
             .post(`https://api.ameerpetit.com/api/entities/items/`, reqData, {
                 headers: {
                     "Content-Type": "application/json",
-                    Accept: "*",
+                    Accept: "*/*",
                 },
             })
             .then((response) => {
