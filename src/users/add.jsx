@@ -13,16 +13,18 @@ const AddUsers = () => {
     const [schemas, setSchemas] = useState({});
     const [loading, setLoading] = useState(true);
 
+
+
     useEffect(() => {
 
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await fetch(
+                axios.get(
                     `https://api.ameerpetit.com/api/entities/schemas/${entityType}/`
-                );
-                const data = await response.json();
-                setSchemas(data[0]);
+                ).them((data) => {
+                    setSchemas(data);
+                })
             } catch (error) {
                 console.error("Error fetching data:", error);
             } finally {
@@ -30,7 +32,7 @@ const AddUsers = () => {
             }
         };
         if (entityType) fetchData();
-    }, []);
+    }, [entityType]);
 
     const handleSubmit = (formData) => {
         const reqData = {

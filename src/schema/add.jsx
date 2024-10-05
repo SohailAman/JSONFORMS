@@ -22,7 +22,7 @@ const AddSchema = () => {
     const params = useParams()
     const entityId = params.id
 
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
@@ -31,10 +31,10 @@ const AddSchema = () => {
             setLoading(true);
             try {
                 const response = await fetch(
-                    `https://api.ameerpetit.com/api/entities/schemas/${entityId}/`
+                    `https://api.ameerpetit.com/api/entities/schemas/${entityId}`
                 );
                 const data = await response.json();
-                const entityData = data[0]
+                const entityData = data
 
                 setValue("name", entityData?.type)
                 setValue("display_name", entityData?.display_name)
@@ -63,6 +63,7 @@ const AddSchema = () => {
     });
 
     const onSubmit = (data) => {
+        console.log(data);
         const reqData = {
             type: data?.name,
             name: data?.name,
