@@ -15,21 +15,23 @@ export const DynamicForm = ({ schemas, onSubmit }) => {
     onSubmit(formData);
   };
 
+  console.log(schemas);
+
   return schemas ? (
     <Form onSubmit={handleSubmit}>
       <JsonForms
         data={
-          schemas?.data && Object.keys(schemas?.data).length > 0
+          schemas?.data && Object.keys(schemas?.data)?.length > 0
             ? schemas?.data
             : undefined
         }
         schema={
-          schemas?.schema && Object.keys(schemas?.schema).length > 0
+          schemas?.schema && Object.keys(schemas?.schema)?.length > 0
             ? schemas?.schema
             : undefined
         }
         uischema={
-          schemas?.uischema && Object.keys(schemas?.uischema).length > 0
+          schemas?.uischema && Object.keys(schemas?.uischema)?.length > 0
             ? schemas?.uischema
             : undefined
         }

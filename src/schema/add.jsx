@@ -31,7 +31,7 @@ const AddSchema = () => {
             setLoading(true);
             try {
                 const response = await fetch(
-                    `https://api.ameerpetit.com/api/entities/schemas/${entityId}`
+                    `https://api.ameerpetit.com/api/entities/schemas/${window.location.hostname}/${entityId}`
                 );
                 const data = await response.json();
                 const entityData = data
@@ -83,7 +83,7 @@ const AddSchema = () => {
                 })
                 .then((response) => {
                     console.log("Response:", response.data);
-                    alert("Form submitted successfully!");
+                    alert("Schema Updated successfully!");
                 })
                 .catch((error) => {
                     console.error("Error submitting form:", error);
@@ -99,7 +99,7 @@ const AddSchema = () => {
                 })
                 .then((response) => {
                     console.log("Response:", response.data);
-                    alert("Form submitted successfully!");
+                    alert("Schema successfully!");
                 })
                 .catch((error) => {
                     console.error("Error submitting form:", error);

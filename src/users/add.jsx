@@ -20,11 +20,10 @@ const AddUsers = () => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                axios.get(
-                    `https://api.ameerpetit.com/api/entities/schemas/${entityType}/`
-                ).them((data) => {
-                    setSchemas(data);
-                })
+                const response = await axios.get(
+                    `https://api.ameerpetit.com/api/entities/schemas/${window.location.hostname}/${entityType}/`
+                )
+                setSchemas(response?.data);
             } catch (error) {
                 console.error("Error fetching data:", error);
             } finally {
@@ -76,7 +75,7 @@ const AddUsers = () => {
                     {loading ? (
                         <p className="text-center p-3">Loading Data Please wait...</p>
                     ) : (
-                        <DynamicForm schemas={schemas ?? null} onSubmit={handleSubmit} />
+                        <DynamicForm schemas={schemas} onSubmit={handleSubmit} />
                     )}
                 </Col>
             </Row>
