@@ -22,6 +22,7 @@ const AddSchema = () => {
     const params = useParams()
     const entityId = params.id
 
+
     const [loading, setLoading] = useState(false);
 
 

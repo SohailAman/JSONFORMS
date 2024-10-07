@@ -2,8 +2,8 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import App from './App'
 import Layout from './layout'
-import AddUsers from './users/add'
-import Users from './users/listing'
+import EntityAddEdit from './entity/add_edit'
+import EntityListing from './entity/listing'
 import AddSchema from './schema/add'
 
 export const AppRoutes = () => {
@@ -11,8 +11,9 @@ export const AppRoutes = () => {
         <Routes>
             <Route element={<Layout />}>
                 <Route path="/" element={<App />} />
-                <Route path="/users" element={<Users />} />
-                <Route path="/:type/add" element={<AddUsers />} />
+                <Route path="/:entityType/listing" element={<EntityListing />} />
+                <Route path="/:type/add" element={<EntityAddEdit />} />
+                <Route path="/:type/edit/:id" element={<EntityAddEdit />} />
 
 
                 <Route path="/schemas/add" element={<AddSchema />} />

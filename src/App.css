@@ -18,9 +18,19 @@ body,
 
 .btn.bth-theme {
   background-color: #43a39f;
-  border: 2px solid #0000;
+  border: 2px solid #43a39f;
   border-radius: 4px;
   color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 20px;
+  text-align: center;
+}
+.btn.bth-theme-outline {
+  border: 1px solid #43a39f;
+  background-color: transparent;
+  border-radius: 4px;
+  color: #43a39f;
   font-size: 14px;
   font-weight: 500;
   padding: 6px 20px;
