@@ -111,7 +111,7 @@ const EntityAddEdit = () => {
             <Row>
                 <Col md={12}>
                     <h1 className="text-center text-theme text-capitalize">
-                        {entityId ? "Edit" : "Add a"}&nbsp;{schemas?.display_name ?? schemas?.name ?? entityType ?? ""}
+                        {schemas?.display_name ?? schemas?.name ?? entityType ?? ""}
                     </h1>
                 </Col>
                 <Col md={12}>
